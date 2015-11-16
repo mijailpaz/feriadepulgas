@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="../elements/product-card.html">
+
+<dom-module id="product-list">
+	<template is="dom-bind">
+		<style>
+
+		</style>
+		<firebase-collection
+		  order-by-child="date"
+		  order-by-type="number"
+		  order-by-priority="false"
+		  location="https://feriadepulgas.firebaseio.com/products"
+		  data="{{products}}"></firebase-collection>
+		<template is="dom-repeat" items="[[products]]" as="p">
+			<product-card title="[[p.name]]" detail="[[p.detail]]" price="[[p.price]]" image="[[p.image]]"></product-card>
+		</template>
+	</template>
+	<script>
+		Polymer({
+			is: 'product-list',
+
+			dateString: function(dateTimestamp) {
+				var d = new Date(dateTimestamp);
+				return d.toLocaleString();
+			},
+		});
+	</script>
+</dom-module>

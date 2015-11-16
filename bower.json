@@ -1,0 +1,35 @@
+{
+  "name": "feriadepulgas",
+  "version": "0.5.0",
+  "authors": [
+    "Mijail Paz <mijail@gmail.com>"
+  ],
+  "description": "Pagina de venta de garage",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "venta",
+    "garage",
+    "articulos",
+    "gratis"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.1.0",
+    "iron-elements": "PolymerElements/iron-elements#~1.0.4",
+    "paper-elements": "PolymerElements/paper-elements#~1.0.5",
+    "firebase-element": "GoogleWebComponents/firebase-element#~1.0.7",
+    "neon-animation": "PolymerElements/neon-animation#~1.0.8",
+    "paper-tags-input": "~1.2.1",
+    "file-upload": "~1.6.0",
+    "mark-down": "robdodson/mark-down#~1.0.0"
+  }
+}

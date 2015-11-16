@@ -1,0 +1,85 @@
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../bower_components/firebase-element/firebase.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+
+<dom-module id="contact-form">
+	<template>
+		<style>
+			.light-blue {
+				background-color: rgba(66, 133, 244, 0.25);
+			}
+
+			#actions {
+				@apply(--layout-horizontal);
+            	@apply(--layout-around-justified);
+			}
+
+		      #contact-form {
+				margin-top: 0;
+				width: 100%;
+				padding: 0;
+		      }
+
+		      @media (min-width: 640px) {
+		        #contact-form {
+					margin-top: 25px;
+					width: 400px;
+		        }
+		      }
+		</style>
+		<div id="contact-form" class="flex">
+          <paper-card heading="Enviar mensaje al vendedor">
+            <div class="card-content">
+              <paper-input id="name" label="Nombre"></paper-input>
+              <paper-input id="email" label="Email"></paper-input>
+              <paper-input id="phone" label="Celular"></paper-input>
+              <paper-textarea id="msg" label="Mensaje"></paper-textarea>
+            </div>
+            <div class="card-actions">
+              <div id="actions">
+	              <paper-button id="send" class="light-blue">Enviar</paper-button>
+	              <paper-button id="cancel">Cancelar</paper-button>
+              </div>
+            </div>
+          </paper-card>
+        </div>
+	</template>
+	<script>
+		Polymer({
+			is: 'contact-form',
+			listeners: {
+		        'send.tap': 'handleSend',
+		        'cancel.tap': 'handleBack'
+		    },
+			handleSend: function(e) {
+				var myFirebaseRef = new Firebase("https://feriadepulgas.firebaseio.com/messages/");
+
+				myFirebaseRef.push({
+				  name: this.$.name.value,
+				  email: this.$.email.value,
+				  phone: this.$.phone.value,
+				  message: this.$.msg.value,
+				  date: Firebase.ServerValue.TIMESTAMP
+				});
+
+
+				//clear message
+				this.$.msg.value = "";
+
+				this.fire('send');
+
+
+				var pages = document.querySelector('iron-pages');
+    			pages.selectPrevious();
+			},
+			handleBack: function(e) {
+				var pages = document.querySelector('iron-pages');
+    			pages.selectPrevious();
+
+    			this.fire('cancel');
+			}
+		});
+	</script>
+</dom-module>

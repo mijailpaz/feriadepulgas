@@ -1,0 +1,95 @@
+<dom-module id="cart-element">
+	<style>
+	      .list {
+	        padding-top: 12px;
+	        background-color: white;
+	        display: inline-block;
+	        width: 240px;
+	        height: 228px;
+	        margin: 12px;
+	      }
+	      .short {
+	        padding-top: 12px;
+	        height: 216px;
+	      }
+	      h4 {
+	        margin-left: 24px;
+	      }
+	      .avatar {
+	        display: inline-block;
+	        width: 40px;
+	        height: 40px;
+	        border-radius: 50%;
+	        overflow: hidden;
+	        background: #ccc;
+	      }
+
+	      paper-icon-button.blue {
+	        color: var(--paper-light-blue-500);
+	      }
+	      paper-icon-button.red {
+	        color: var(--paper-red-500);
+	      }
+	      paper-icon-button.orange {
+	        color: var(--paper-orange-500);
+	      }
+	      paper-icon-button.green {
+	        color: var(--paper-green-500);
+	      }
+	      paper-icon-button.blue:hover {
+	        background: var(--paper-light-blue-50);
+	        border-radius: 50%;
+	      }
+	      paper-icon-button.red:hover {
+	        background: var(--paper-red-50);
+	        border-radius: 50%;
+	      }
+	      paper-icon-button.orange:hover {
+	        background: var(--paper-orange-50);
+	        border-radius: 50%;
+	      }
+	      paper-icon-button.green:hover {
+	        background: var(--paper-green-50);
+	        border-radius: 50%;
+	      }
+
+	      paper-button.colorful {
+	        color: #4285f4;
+	      }
+	      paper-button[raised].colorful {
+	        background: #4285f4;
+	        color: #fff;
+	      }
+	</style>
+	<template>
+        <div class="list" role="listbox">
+          <paper-item>
+            <paper-item-body two-line class="layout vertical">
+              <div>Item No. 1</div>
+              <div secondary>LPS. 300.00</div>
+            </paper-item-body>
+            <paper-icon-button icon="clear" alt="clear" class="red"></paper-icon-button>
+          </paper-item>
+          <paper-item>
+            <paper-item-body two-line class="layout vertical">
+              <div>Item No. 2</div>
+              <div secondary>LPS. 150.00</div>
+            </paper-item-body>
+            <paper-icon-button icon="clear" alt="clear" class="red"></paper-icon-button>
+          </paper-item>
+          <paper-item>
+            <paper-item-body two-line class="layout vertical">
+              <div>Item No. 3</div>
+              <div secondary>LPS. 3,000.00</div>
+            </paper-item-body>
+            <paper-icon-button icon="clear" alt="clear" class="red"></paper-icon-button>
+          </paper-item>
+        </div>
+        <paper-button tabindex="0" raised class="colorful">Contactar vendedor</paper-button>
+	</template>
+	<script>
+		Polymer({
+			is: 'cart-element'
+		});
+	</script>
+</dom-module>

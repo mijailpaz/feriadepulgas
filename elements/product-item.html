@@ -1,0 +1,107 @@
+
+<link href="../bower_components/polymer/polymer.html" rel="import">
+<link href="../bower_components/paper-styles/color.html" rel="import">
+<link href="../bower_components/paper-styles/typography.html" rel="import">
+<link href="../bower_components/paper-material/paper-material.html" rel="import">
+<link href="../bower_components/paper-item/paper-item.html" rel="import">
+<link href="../bower_components/paper-card/paper-card.html" rel="import">
+<link href="../bower_components/paper-button/paper-button.html" rel="import">
+
+<link rel="stylesheet" href="../bower_components/paper-styles/demo.css">
+	
+<!-- 	<link href="../bower_components/iron-input/iron-input.html" rel="import"> -->
+<!-- 	<link href="../bower_components/paper-button/paper-button.html" rel="import"> -->
+
+<dom-module id="product-item" attributes="image title detail image pid">
+  <style>
+
+    paper-card {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    paper-material {
+    	/*max-width: 350px;*/
+      margin: 15px;
+    }
+
+    paper-button {
+      display: inline-block;
+    }
+
+    paper-button.blue {
+      color: var(--paper-light-blue-500);
+      --paper-button-flat-focus-color: var(--paper-light-blue-50);
+    }
+    paper-button.blue:hover {
+      background: var(--paper-light-blue-50);
+    }
+
+    .pink {
+      --paper-card-header-color: var(--paper-pink-500);
+    }
+
+    .detail {
+      display: inline-block;
+      width: 100%;
+      height: 66px;
+      overflow: hidden;
+      word-break: break-word;
+    }    
+  </style>
+  <template>
+    <!-- local DOM for your element -->
+
+      <paper-material elevation="0">
+  	    <paper-card image="http://placehold.it/350x150">
+  	      <div class="card-content">
+            <h3>{{title}}</h3>
+  	        <div class="detail">{{detail}}</div>
+  	      </div>
+  	      <div class="card-actions">
+  	        <paper-button tabindex="0" class="blue ripple">Contactar</paper-button>
+  	      </div>
+  	    </paper-card>
+  	  </paper-material>
+    </juicy-tile-list>
+  </template>
+</dom-module>
+
+<script>
+  // element registration
+  Polymer({
+    is: "product-item",
+
+    // add properties and methods on the element's prototype
+
+    properties: {
+    	// declare properties for the element's public API
+		image: {
+			type: String,
+			value: ""	
+		},
+		title: {
+			type: String,
+			value: ""	
+		},
+    detail: {
+      type: String,
+      value: "Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris."
+    },
+    	pid: {
+	    	type: Number,
+	    	value: -1
+    	},
+    	time: {
+	    	type: String,
+	    	value: new Date().toLocaleString()
+	    }
+    },
+	ready: function(e){
+      var i;
+      this.detail = '';
+      for(i=0; i<parseInt(Math.random()*10000, 10); i++)
+        this.detail += 'a ';
+	}
+  });
+</script>

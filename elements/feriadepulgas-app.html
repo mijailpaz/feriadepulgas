@@ -1,0 +1,87 @@
+<link href="../bower_components/polymer/polymer.html" rel="import">
+<link href="../elements/product-item.html" rel="import">
+<link rel="import" href="../elements/cart-element.html">
+<link href="../bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+<link href="../bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+<link href="../bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+<link href="../bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+<link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+<link href="../bower_components/iron-pages/iron-pages.html" rel="import">
+<link rel="import" href="../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-item/paper-item-body.html">
+
+<link rel="stylesheet" href="../bower_components/paper-styles/paper-styles.html">
+
+<dom-module id="feriadepulgas-app">
+    <style>
+      .main-content {
+          background: url(http://subtlepatterns.com/patterns/scribble_light.png) ;
+      }
+
+      product-item {
+        max-width: 500px;
+      }
+
+      .toolbar-title {
+        display: block;
+      }
+
+      @media (min-width: 640px) {
+        .toolbar-title {
+          display: none;
+        }
+      }
+
+      @media (min-width: 960px) {
+        product-item {
+          max-width: 40%;
+        }
+      }
+
+      @media (min-width: 1100px) {
+        product-item {
+          max-width: 300px;
+        }
+      }
+    </style>
+  <template>
+    <!-- local DOM for your element -->
+    <paper-header-panel main>
+      <paper-toolbar>
+        <div>Feria de pulgas</div>
+      </paper-toolbar>
+      <div class="content"></div>
+          <div id="grid-items" class="horizontal layout wrap">
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+            <product-item title="Test"></product-item>
+          </div>
+      </div>
+    </paper-header-panel>
+
+  
+  </template>
+</dom-module>
+
+<script>
+  // element registration
+  Polymer({
+    is: "feriadepulgas-app",
+
+    // add properties and methods on the element's prototype
+
+    properties: {
+
+    },
+  	ready: function(e){
+        
+  	}
+  });
+</script>

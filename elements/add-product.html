@@ -1,0 +1,132 @@
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../bower_components/firebase-element/firebase.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-tags-input/paper-tags-input.html">
+<link rel="import" href="../bower_components/file-upload/file-upload.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="add-product">
+	<template>
+		<style>
+			.light-blue {
+				background-color: rgba(66, 133, 244, 0.25);
+			}
+
+			#actions {
+				@apply(--layout-horizontal);
+            	@apply(--layout-around-justified);
+			}
+
+		      #add-product {
+				margin-top: 0;
+				width: 100%;
+				padding: 0;
+		      }
+
+		      #add-product paper-card {
+		      	width: 100%;
+		      }
+
+		      @media (min-width: 640px) {
+		        #add-product {
+					margin-top: 25px;
+					width: 400px;
+		        }
+		      }
+		</style>
+		<div id="add-product" class="flex">
+          <paper-card>
+            <div class="card-content">
+              <paper-input id="name" required auto-validate error-message="El nombre del producto es obligatorio" label="Nombre"></paper-input>
+              <paper-textarea id="detail" required error-message="La descripcion es obligatoria" char-counter label="Descripcion"></paper-textarea>
+              <paper-input id="price" type="number" required auto-validate error-message="El precio es obligatorio" label="Precio">
+          		<div prefix>LPS. </div>
+          	  </paper-input>
+              <paper-tags-input id="tags" label="Tags" placeholder="Escriba los tags (opcional)"></paper-tags-input>
+              <file-upload id="uploadimage" droppable raised method="POST" target="upload.php">Foto</file-upload>
+            </div>
+            <div class="card-actions">
+              <div id="actions">
+	              <paper-button id="send" class="light-blue">Salvar</paper-button>
+	              <paper-button id="cancel">Limpiar</paper-button>
+              </div>
+            </div>
+          </paper-card>
+        </div>
+	</template>
+	<script>
+		Polymer({
+			is: 'add-product',
+
+			listeners: {
+		        'send.tap': 'saveProduct',
+		        'cancel.tap': 'clearForm'
+		    },
+
+		    properties: {
+				image: {
+					type: String,
+					value: "asd"
+				},
+		    },
+
+			ready: function() {
+				this.$.uploadimage.addEventListener('success', function(event) {
+				    var response = JSON.parse(event.detail.xhr.response);
+				    event.srcElement.dataHost.image = response.image;
+				});
+			},
+
+			saveProduct: function(e) {
+				var firebaseProducts = new Firebase("https://feriadepulgas.firebaseio.com/products/");
+
+				firebaseProducts.push({
+				  name: this.$.name.value,
+				  detail: this.$.detail.value,
+				  tags: this.$.tags.tags,
+				  image: this.image,
+				  price: this.$.price.value,
+				  date: Firebase.ServerValue.TIMESTAMP
+				});
+
+				var firebaseTags = new Firebase("https://feriadepulgas.firebaseio.com/tags/");
+				firebaseTags.set(this.$.tags.tags);
+
+				this.clearForm();
+
+				this.fire('saved');
+			},
+			clearForm: function(e) {
+				this.$.name.autoValidate = false;
+				this.$.name.value = "";
+				this.$.name.autoValidate = false;
+
+				this.$.detail.autoValidate = false;
+				this.$.detail.value = "";
+				this.$.detail.autoValidate = true;
+
+				this.$.price.autoValidate = false;				
+				this.$.price.value = "";
+				this.$.price.autoValidate = true;
+
+				this.$.tags.tags = [];
+				this.$.uploadimage.clear();
+			}
+		});
+		/*
+      	document.querySelector('#upimage').addEventListener('error', function (e) {
+      		console.log(e);
+          	alert('Error');
+      	});
+      	document.querySelector('#upimage').addEventListener('success', function (e) {
+      		console.log(e);
+          	alert('Error');
+      	});
+		*/
+	</script>
+</dom-module>
