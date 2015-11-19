@@ -5,6 +5,8 @@
 <link href="../bower_components/paper-item/paper-item.html" rel="import">
 <link href="../bower_components/paper-card/paper-card.html" rel="import">
 <link href="../bower_components/paper-button/paper-button.html" rel="import">
+
+<link rel="import" href="../bower_components/mark-down/mark-down.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 
 <link rel="stylesheet" href="../bower_components/paper-styles/paper-styles.html">
@@ -50,7 +52,7 @@
 			    height: 46px;
 		    }
 
-		    .detail {
+		    mark-down {
 		      display: inline-block;
 		      width: 100%;
 		      height: 64px;
@@ -135,7 +137,7 @@
 				<div class="price-tag">
 				  <span class="cur">LPS. </span><span class="number">{{price}}</span>
 				</div>
-			    <div class="detail">{{detail}}</div>
+			    <mark-down text="{{detail}}"></mark-down>
 			  </div>
 			  <div class="card-actions">
 			    <paper-button tabindex="0" on-click="handleClick" class="blue ripple">Contactar</paper-button>

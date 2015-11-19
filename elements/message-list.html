@@ -5,48 +5,59 @@
 <link rel="stylesheet" href="../bower_components/paper-material/paper-material.html">
 
 <dom-module id="message-list">
-	<template is="dom-bind">
-		<style>
-			.message-item {
-				padding: 15px;
-				margin: 15px;
-			}
-			.name {
-				font-weight: bold;
-				font-size: 1.4em;
-			}
-			.date {
-				margin-top: 7px;
-				padding-top: 7px;
-				border-top: 1px solid #ccc;
-				color: #aaa;
-				font-size: 0.8em;
-			}
-		</style>
-		<firebase-collection
-		  order-by-child="date"
-		  order-by-type="number"
-		  order-by-priority="false"
-		  location="https://feriadepulgas.firebaseio.com/messages"
-		  data="{{messages}}"></firebase-collection>
-		<template is="dom-repeat" items="[[messages]]" as="msg">
-			<paper-material class="message-item" elevation="1">
-			  	<div class="name">[[msg.name]]</div>
-			  	<div class="email">[[msg.email]]</div>
-			  	<div class="phone">[[msg.phone]]</div>
-			  	<div class="date">[[dateString(msg.date)]]</div>
-			  	<mark-down text="[[msg.message]]"></mark-down>
-			</paper-material>
+	<template>
+		<template is="dom-bind">
+			<style>
+				.message-item {
+					padding: 15px;
+					margin: 15px;
+				}
+				.name {
+					font-weight: bold;
+					font-size: 1.4em;
+				}
+				.date {
+					margin-top: 7px;
+					padding-top: 7px;
+					border-top: 1px solid #ccc;
+					color: #aaa;
+					font-size: 0.8em;
+				}
+			</style>
+			<firebase-collection
+			  order-by-child="date"
+			  order-by-type="number"
+			  order-by-priority="false"
+			  location="https://feriadepulgas.firebaseio.com/messages"
+			  data="{{messages}}"></firebase-collection>
+			<template is="dom-repeat" items="[[messages]]" as="msg">
+				<paper-material class="message-item" elevation="1">
+				  	<div class="name">[[msg.name]]</div>
+				  	<div class="email">[[msg.email]]</div>
+				  	<div class="phone">[[msg.phone]]</div>
+				  	<div class="date">[[dateString(msg.date)]]</div>
+				  	<mark-down text="[[msg.message]]"></mark-down>
+				</paper-material>
+			</template>
 		</template>
 	</template>
 	<script>
 		Polymer({
 			is: 'message-list',
+			//dateString: function(dateTimestamp) {
+			//	var d = new Date(dateTimestamp);
+			//	return d.toLocaleString();
+			//},
+			ready: function() {
 
-			dateString: function(dateTimestamp) {
-				var d = new Date(dateTimestamp);
-				return d.toLocaleString();
-			},
+				//idea source: http://stackoverflow.com/questions/30764868/polymer-1-0-more-routing
+				//verificar si seria la mejor forma.
+				var template = document.querySelector('template');
+				template.dateString = function(dateTimestamp) {
+				    var d = new Date(dateTimestamp);
+					return d.toLocaleString();
+				};
+			}
 		});
 	</script>
 </dom-module>
